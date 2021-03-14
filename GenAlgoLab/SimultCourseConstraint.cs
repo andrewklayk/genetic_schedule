@@ -18,8 +18,8 @@ namespace GenAlgoLab
             var entriesForB = sc.Entries.Where(x=>x.course == SecondCourse);
             foreach(var entA in entriesForA)
             {
-                if (entriesForB.Any(x => x.timeSlot == entA.timeSlot))
-                    totalPenalty += Penalty;
+                //if (entriesForB.Any(x => x.timeSlot == entA.timeSlot))
+                //    totalPenalty += Penalty;
             }
             return totalPenalty;
         }

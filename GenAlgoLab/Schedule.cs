@@ -12,51 +12,57 @@ namespace GenAlgoLab
         private readonly int OverRoomSizePenalty = 20;
         private readonly int NotQualifiedPenalty = 200;
         public uint violationCount = 0;
-        public List<ScheduleEntry> Entries;
+        public List<CourseScheduleEntry> Entries;
         public List<ConstraintBase> Constraints;
         public double Fitness {
-            get 
+            get
             {
                 double totalPenalty = 0;
                 violationCount = 0;
-                foreach (var scheduleEntry in Entries)
+                foreach (var entryX in Entries)
                 {
-                    if (scheduleEntry.ExceedsCapacity())
-                    {
-                        totalPenalty += OverRoomSizePenalty;
-                        violationCount++;
-                    }
-                    if (scheduleEntry.HasUnqualifiedInstructor())
+                    var countExcCap = entryX.CountExceedsCapacity();
+                    totalPenalty += OverRoomSizePenalty * countExcCap;
+                    violationCount += countExcCap;
+                    if (entryX.HasUnqualifiedInstructor())
                     {
                         totalPenalty += NotQualifiedPenalty;
                         violationCount++;
                     }
-                    foreach (var x in Entries)
+                    foreach (var entryY in Entries)
                     {
                         /*for(int i = 0; i < 5; i++)
                         {
                             for(int j = 0; j < 4; j++)
                             {
-                                if (anotherEntry.daysAndTimes[i, j] == scheduleEntry.daysAndTimes[i, j])
+                                if (anotherEntry.daysAndTimes[i, j] == entryX.daysAndTimes[i, j])
                                 {
-                                    if (anotherEntry.room == scheduleEntry.room)
+                                    if (anotherEntry.room == entryX.room)
                                         totalPenalty += BusyRoomPenalty;
-                                    if (anotherEntry.instructor == scheduleEntry.instructor)
+                                    if (anotherEntry.instructor == entryX.instructor)
                                         totalPenalty += BusyTeacherPenalty;
                                 }
                             }
                         }*/
-                        if(x != scheduleEntry && x.day == scheduleEntry.day && x.timeSlot == scheduleEntry.timeSlot)
+                        for (byte day = 0; day < 5; day++)
                         {
-                            if (x.room == scheduleEntry.room)
+                            for (byte time = 0; time < 4; time++)
                             {
-                                totalPenalty += BusyRoomPenalty;
-                                violationCount++;
-                            }
-                            if (x.instructor == scheduleEntry.instructor)
-                            {
-                                totalPenalty += BusyTeacherPenalty;
-                                violationCount++;
+                                if (entryX != entryY &&
+                                    entryX.dayTimeRoom.ContainsKey(new Tuple<byte, byte>(day, time)) &&
+                                    entryY.dayTimeRoom.ContainsKey(new Tuple<byte, byte>(day, time)))
+                                {
+                                    if (entryX.instructor == entryY.instructor)
+                                    {
+                                        totalPenalty += BusyTeacherPenalty;
+                                        violationCount++;
+                                    }
+                                    if (entryX.dayTimeRoom[new Tuple<byte, byte>(day, time)] == entryY.dayTimeRoom[new Tuple<byte, byte>(day, time)])
+                                    {
+                                        totalPenalty += BusyRoomPenalty;
+                                        violationCount++;
+                                    }
+                                }
                             }
                         }
                     }
@@ -67,7 +73,7 @@ namespace GenAlgoLab
         public Schedule(int id)
         {
             ScheduleID = id;
-            Entries = new List<ScheduleEntry>();
+            Entries = new List<CourseScheduleEntry>();
         }
         //Compares two Schedules by their Fitness value
         public int CompareTo(object obj)

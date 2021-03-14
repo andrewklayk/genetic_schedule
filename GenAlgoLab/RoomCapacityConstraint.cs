@@ -18,8 +18,8 @@ namespace GenAlgoLab
             var EntriesWithCourse = s.Entries.Where(x => x.course == Course);
             foreach (var entry in EntriesWithCourse)
             {
-                if (capacity > entry.room.Capacity)
-                    cumPenalty += Penalty;
+                //if (capacity > entry.room.Capacity)
+                //    cumPenalty += Penalty;
             }
             return cumPenalty;
         }

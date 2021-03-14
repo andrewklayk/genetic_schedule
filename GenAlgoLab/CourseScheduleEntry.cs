@@ -1,26 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GenAlgoLab
 {
     public class CourseScheduleEntry
     {
         public Course course;
-        public bool[,] daysAndTimes;
-        public Room room;
+        public Dictionary<Tuple<byte, byte>, Room> dayTimeRoom;
         public Instructor instructor;
-        public CourseScheduleEntry(Course _course, Room _room, Instructor _instructor)
+        public CourseScheduleEntry(Course _course, Instructor _instructor)
         {
             course = _course;
-            room = _room;
             instructor = _instructor;
-            daysAndTimes = new bool[5,4];
-            for(int i = 0; i < 5; i++)
+            dayTimeRoom = new Dictionary<Tuple<byte, byte>, Room>();
+        }
+        public CourseScheduleEntry(CourseScheduleEntry x)
+        {
+            course = x.course;
+            instructor = x.instructor;
+            dayTimeRoom = new Dictionary<Tuple<byte, byte>, Room>();
+            foreach(var entry in x.dayTimeRoom)
             {
-                for(int j = 0; j <4; j++)
-                {
-                    daysAndTimes[i, j] = false;
-                }
+                dayTimeRoom.Add(entry.Key, entry.Value);
             }
+        }
+        public void AddTimeRoomAssignment(byte day, byte time, Room room)
+        {
+            var key = new Tuple<byte, byte>(day, time);
+            dayTimeRoom[key] = room;
+        }
+        public Room GetTimeRoomAssignmentOrNull(byte day, byte time)
+        {
+            var key = new Tuple<byte, byte>(day, time);
+            if (dayTimeRoom.ContainsKey(key))
+                return dayTimeRoom[key];
+            else
+                return null;
         }
         /*public bool AddDayTime(byte day, byte time)
         {
@@ -36,22 +51,19 @@ namespace GenAlgoLab
                     course = 
             }
         }*/
-        public bool ExceedsCapacity()
+        public uint CountExceedsCapacity()
         {
-            return course.Capacity > room.Capacity;
+            uint count = 0;
+            foreach(var entry in dayTimeRoom)
+            {
+                if (entry.Value.Capacity < course.Capacity)
+                    count++;
+            }
+            return count++;
         }
         public bool NotEnoughHours()
         {
-            int hoursCount = 0;
-            for(int i = 0; i < 5; i++)
-            {
-                for(int j = 0; j <4; j++)
-                {
-                    if (daysAndTimes[i,j])
-                        hoursCount += 1;
-                }
-            }
-            return hoursCount < course.MinHours;
+            return dayTimeRoom.Count < course.MinHours;
         }
         public bool HasUnqualifiedInstructor()
         {

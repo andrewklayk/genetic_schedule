@@ -57,7 +57,7 @@ namespace GenAlgoLab
         private void btn_start_Click(object sender, EventArgs e)
         {
             sc.RunSimpleGA();
-            for(int i = 0; i < sc.SchedulePopulation[39].Entries.Count; i++)
+            /*for(int i = 0; i < sc.SchedulePopulation[39].Entries.Count; i++)
             {
                 var item = sc.SchedulePopulation[39].Entries[i];
                 switch (item.day)
@@ -80,7 +80,7 @@ namespace GenAlgoLab
                     default:
                         throw new ArgumentException("day > 4");
                 }
-            }
+            }*/
         }
     }
 }

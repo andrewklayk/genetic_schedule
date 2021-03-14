@@ -55,21 +55,25 @@ namespace GenAlgoLab
             for (int i = 0; i < popSize; i++)
             {
                 Schedule newSchedule = new Schedule(i);
-                /*foreach (var courseToAdd in courses)
+                foreach (var courseToAdd in Courses)
                 {
-                    var room = Rooms[rng.Next(Rooms.Count)];
                     var instructor = Instructors[rng.Next(Instructors.Count)];
-                    var newEntry = new CourseScheduleEntry(courseToAdd, room, instructor);
+                    var newEntry = new CourseScheduleEntry(courseToAdd, instructor);
                     for(byte day = 0; day<daysCount; day++)
                     {
                         for(byte time = 0; time<timeSlotsCount; time++)
                         {
-                            newEntry.daysAndTimes[day, time] = 1 == rng.Next(2);
-                            room.busyDayTime[day, time] = true;
+                            if (rng.Next(0, 4) == 0)
+                            {
+                                var room = Rooms[rng.Next(Rooms.Count)];
+                                newEntry.AddTimeRoomAssignment(day, time, room);
+                                room.busyDayTime[day, time] = true;
+                            }
                         }
                     }
-                }*/
-                for (byte day = 0; day < daysCount; day++)
+                    newSchedule.Entries.Add(newEntry);
+                }
+                /*for (byte day = 0; day < daysCount; day++)
                 {
                     for (byte time = 0; time < timeSlotsCount; time++)
                     {
@@ -81,7 +85,7 @@ namespace GenAlgoLab
                         };
                         newSchedule.Entries.Add(newEntry);
                     }
-                }
+                }*/
                 SchedulePopulation.Add(newSchedule);
             }
         }
@@ -157,24 +161,38 @@ namespace GenAlgoLab
                 for (int i = 0; i < firstParent.Entries.Count; i++)
                 {
                     var crVal = rng.NextDouble();
-                    child_1.Entries.Add(new ScheduleEntry(firstParent.Entries[i]));
-                    child_2.Entries.Add(new ScheduleEntry(secondParent.Entries[i]));
-                    if (crVal < crossoverProb)
+                    child_1.Entries.Add(new CourseScheduleEntry(firstParent.Entries[i]));
+                    child_2.Entries.Add(new CourseScheduleEntry(secondParent.Entries[i]));
+                    /*if (crVal < crossoverProb)
                     {
                         child_1.Entries[i].course = secondParent.Entries[i].course;
                         child_2.Entries[i].course = firstParent.Entries[i].course;
-                    }
+                    }*/
                     crVal = rng.NextDouble();
                     if (crVal < crossoverProb)
                     {
                         child_1.Entries[i].instructor = secondParent.Entries[i].instructor;
                         child_2.Entries[i].instructor = firstParent.Entries[i].instructor;
                     }
-                    crVal = rng.NextDouble();
-                    if (crVal < crossoverProb)
-                    {
-                        child_1.Entries[i].room = secondParent.Entries[i].room;
-                        child_2.Entries[i].room = firstParent.Entries[i].room;
+                    for (byte day = 0; day < 5; day++) 
+                    { 
+                        for(byte time = 0; time < 4; time++)
+                        {
+                            crVal = rng.NextDouble();
+                            if (crVal < crossoverProb)
+                            {
+                                var assign_1 = secondParent.Entries[i].GetTimeRoomAssignmentOrNull(day, time);
+                                var assign_2 = firstParent.Entries[i].GetTimeRoomAssignmentOrNull(day, time);
+                                if (assign_1 == null)
+                                    child_1.Entries[i].dayTimeRoom.Remove(new Tuple<byte, byte>(day, time));
+                                else
+                                    child_1.Entries[i].AddTimeRoomAssignment(day, time, assign_1);
+                                if (assign_2 == null)
+                                    child_2.Entries[i].dayTimeRoom.Remove(new Tuple<byte, byte>(day, time));
+                                else
+                                    child_2.Entries[i].AddTimeRoomAssignment(day, time, assign_2);
+                            }
+                        }
                     }
                 }
                 children.Add(child_1);
@@ -242,8 +260,9 @@ namespace GenAlgoLab
                             entry.instructor = Instructors[rng.Next(Instructors.Count)];
                             break;
                         case 2:
-                            entry.room = Rooms[rng.Next(Rooms.Count)];
-                            entry.room.busyDayTime[entry.day, entry.timeSlot] = true;
+                            var day = (byte) rng.Next(5);
+                            var time = (byte) rng.Next(4);
+                            entry.AddTimeRoomAssignment(day, time, Rooms[rng.Next(Rooms.Count)]);
                             break;
                     }
                 }
