@@ -160,15 +160,9 @@ namespace GenAlgoLab
                     throw new ArgumentException("Different chromosome count in individuals!");
                 for (int i = 0; i < firstParent.Entries.Count; i++)
                 {
-                    var crVal = rng.NextDouble();
                     child_1.Entries.Add(new CourseScheduleEntry(firstParent.Entries[i]));
                     child_2.Entries.Add(new CourseScheduleEntry(secondParent.Entries[i]));
-                    /*if (crVal < crossoverProb)
-                    {
-                        child_1.Entries[i].course = secondParent.Entries[i].course;
-                        child_2.Entries[i].course = firstParent.Entries[i].course;
-                    }*/
-                    crVal = rng.NextDouble();
+                    var crVal = rng.NextDouble();
                     if (crVal < crossoverProb)
                     {
                         child_1.Entries[i].instructor = secondParent.Entries[i].instructor;
@@ -184,11 +178,11 @@ namespace GenAlgoLab
                                 var assign_1 = secondParent.Entries[i].GetTimeRoomAssignmentOrNull(day, time);
                                 var assign_2 = firstParent.Entries[i].GetTimeRoomAssignmentOrNull(day, time);
                                 if (assign_1 == null)
-                                    child_1.Entries[i].dayTimeRoom.Remove(new Tuple<byte, byte>(day, time));
+                                    child_1.Entries[i].dayTimeRoom.RemoveTupleKey(day, time);
                                 else
                                     child_1.Entries[i].AddTimeRoomAssignment(day, time, assign_1);
                                 if (assign_2 == null)
-                                    child_2.Entries[i].dayTimeRoom.Remove(new Tuple<byte, byte>(day, time));
+                                    child_2.Entries[i].dayTimeRoom.RemoveTupleKey(day, time);
                                 else
                                     child_2.Entries[i].AddTimeRoomAssignment(day, time, assign_2);
                             }

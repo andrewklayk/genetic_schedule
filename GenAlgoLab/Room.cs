@@ -19,7 +19,7 @@ namespace GenAlgoLab
         }
         public override string ToString()
         {
-            return string.Format("(Id: {0}, Cap: {1})", RoomID, Capacity);
+            return string.Format("Id: {0}, Cap: {1}", RoomID, Capacity);
         }
     }
 }

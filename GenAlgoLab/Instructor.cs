@@ -32,7 +32,7 @@ namespace GenAlgoLab
 
         public override string ToString()
         {
-            return string.Format("(Id: {0}, FullName: {1})", InstructorID, FullName);
+            return string.Format("Id: {0}, FullName: {1}", InstructorID, FullName);
         }
     }
 }

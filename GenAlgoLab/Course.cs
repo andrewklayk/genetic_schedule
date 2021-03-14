@@ -34,7 +34,7 @@ namespace GenAlgoLab
 
         public override string ToString()
         {
-            return string.Format("(Id: {0}, Name: {1}, Cap: {2})", CourseID, Name, Capacity);
+            return string.Format("Id: {0}, Name: {1}, Cap: {2}", CourseID, Name, Capacity);
         }
         public override bool Equals(object obj)
         {
