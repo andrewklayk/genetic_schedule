@@ -62,7 +62,7 @@
     <Compile Include="Room.cs" />
     <Compile Include="RoomCapacityConstraint.cs" />
     <Compile Include="Schedule.cs" />
-    <Compile Include="Scheduler.cs" />
+    <Compile Include="GenAlgorithm.cs" />
     <Compile Include="SimultCourseConstraint.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
