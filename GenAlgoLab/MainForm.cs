@@ -73,7 +73,7 @@ namespace GenAlgoLab
                 button1.Visible = true;
                 btn_start.Text = "Заново";
             }
-            sc.RunGA(stopOnFirstDecision: true);
+            sc.RunGA();
             PopulateGrids(sc.schedules.Max());
         }
 

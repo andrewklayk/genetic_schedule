@@ -14,15 +14,16 @@ namespace GenAlgoLab
         // 1 - 10:35 - 12:10
         // 3 - 12:20 - 13:55
         // 4 - 14:05 - 15:40
-        static int timeSlotsCount = 3;
+        static int timeSlotsCount = 4;
         //Number of schedules (population size)
         static int popSize = 40;
+        //Chromosome population
+        public List<Schedule> schedules;
         public int maxViolations = 0;
         public List<Room> rooms;
         public HashSet<Course> courses;
         public HashSet<Group> groups;
         public List<Instructor> instructors;
-        public List<Schedule> schedules;
         private double crossoverProb = 0.5;
         private double mutationProb = 0.1 ;
 
@@ -247,28 +248,32 @@ namespace GenAlgoLab
             }
         }
 
-        public long RunGA(int minGenerations = -1, bool stopOnFirstDecision = false)
+        public Schedule RunGA(int minGenerations = -1, int maxGenerations = 10000)
         {
-            int i = 0;
-            while(true)
+            for(int i = 0; i < maxGenerations; i++)
             {
+                //Calculate fitness
                 foreach (var s in schedules)
                 {
                     s.EvaluateFitness();
                 }
+                //Determine if a good enough solution exists already
                 schedules.Sort();
                 if (schedules[popSize-1].violationCount <= maxViolations && (i >= minGenerations || minGenerations == -1))
-                    return i;
+                    return schedules[popSize - 1];
+                //Perform selection
                 var selectedForReproduction = FullSelectForReproduction();
+                //Perform crossover
                 var children = FullCrossover(selectedForReproduction);
+                //Replace old chromosomes with new ones (except toNextGen best ones) and fix and mutate
                 for(int j = 0; j < popSize - toNextGen; j++)
                 {
                     schedules[j] = children[j];
                     schedules[j].EvaluateFitness();
                     MutateAndFix(schedules[j]);
                 }
-                i++;
             }
+            return null;
         }
     }
 }
