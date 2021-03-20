@@ -8,8 +8,9 @@ namespace GenAlgoLab
 {
     public class Instructor
     {
-        int InstructorID;
-        public string FullName;
+        readonly int InstructorID;
+        readonly public string FullName;
+        //Courses that this instructor can teach
         public HashSet<Course> CoursesQualifiesFor;
         public Instructor(int id)
         {
@@ -33,6 +34,22 @@ namespace GenAlgoLab
         public override string ToString()
         {
             return string.Format("Id: {0}, FullName: {1}", InstructorID, FullName);
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            if (!(obj is Instructor objInst))
+                return false;
+            else
+                return objInst.InstructorID == this.InstructorID && objInst.FullName == this.FullName;
+        }
+        public override int GetHashCode()
+        {
+            int hashCode = -230024762;
+            hashCode = hashCode * -1521134295 + InstructorID.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FullName);
+            return hashCode;
         }
     }
 }

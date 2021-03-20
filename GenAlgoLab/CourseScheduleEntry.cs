@@ -10,10 +10,9 @@ namespace GenAlgoLab
         public byte time;
         public Room room;
         public Instructor instructor;
-        public CourseScheduleEntry(Course _course, Instructor _instructor)
+        public CourseScheduleEntry(Course _course)
         {
             course = _course;
-            instructor = _instructor;
         }
         public CourseScheduleEntry(CourseScheduleEntry x)
         {
@@ -23,9 +22,14 @@ namespace GenAlgoLab
             time = x.time;
             room = x.room;
         }
-        public double GetExceedsRoomCapacityMultiplier()
+        public double GetCapacityPenaltyMultiplier()
         {
-            return course.Capacity > room.Capacity ? course.Capacity / room.Capacity : 0;
+            if (course.Capacity == room.Capacity)
+                return 0;
+            if (course.Capacity > room.Capacity)
+                return course.Capacity / room.Capacity;
+            else
+                return (float)room.Capacity / course.Capacity;
         }
         public bool HasUnqualifiedInstructor()
         {

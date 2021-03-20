@@ -20,8 +20,7 @@ namespace GenAlgoLab
         public double busyGroupCount = 0;
         public double Fitness = 0;
         public List<CourseScheduleEntry> Entries;
-        public List<ConstraintBase> Constraints;
-        public void CalcFitness()
+        public void EvaluateFitness()
         {
             double totalPenalty = 0;
             violationCount = 0;
@@ -32,9 +31,9 @@ namespace GenAlgoLab
             busyGroupCount = 0;
             foreach (var entryX in Entries)
             {
-                var excCap = entryX.GetExceedsRoomCapacityMultiplier();
+                var excCap = entryX.GetCapacityPenaltyMultiplier();
                 totalPenalty += OverRoomSizePenalty * excCap;
-                if (excCap != 0)
+                if (entryX.room.Capacity < entryX.course.Capacity)
                 {
                     violationCount++;
                     capCount++;
@@ -86,6 +85,10 @@ namespace GenAlgoLab
             if (obj == null)
                 throw new ArgumentException("obj is not a Schedule");
             return this.Fitness.CompareTo(objSchedule.Fitness);
+        }
+        public string listViolations()
+        {
+            return string.Format("Busy room: {0}, Busy teacher: {1}, Busy group {2}, Over cap: {3}, Unqualified teacher: {4}", occRoomCount, occTeacherCount, busyGroupCount, capCount, unqualCount);
         }
     }
 }

@@ -22,8 +22,8 @@ namespace GenAlgoLab
         {
             Course c1 = new Course(0, "OGKG", 30, 1);
             Course c2 = new Course(1, "IntSys", 30,1);
-            Course c3 = new Course(2, "BI", 30,1);
-            Course c8 = new Course(7, "Web", 30, 1);
+            Course c3 = new Course(2, "BI", 50,1);
+            Course c8 = new Course(7, "Web", 60, 1);
             Course c9 = new Course(8, "Parallel", 30, 1);
             Course c10 = new Course(9, "Manag", 30, 1);
             sc = new GenAlgorithm(
@@ -35,11 +35,11 @@ namespace GenAlgoLab
                    new Room(15, 100), new Room(16, 100)
                },
                new List<Instructor> { 
-                   new Instructor(0, "Fedorus", new HashSet<Course>{ }),
-                   new Instructor(1,"Panch", new HashSet<Course>{ }),
-                   new Instructor(2, "Brevno", new HashSet<Course>{ }), 
-                   new Instructor(3,"Vergun", new HashSet<Course>{ }),
-                   new Instructor(3,"P", new HashSet<Course>{ }),
+                   new Instructor(0, "Fedorus", new HashSet<Course>{c1, c2, c3 }),
+                   new Instructor(1,"Panch", new HashSet<Course>{ c8,c9}),
+                   new Instructor(2, "Brevno", new HashSet<Course>{c9,c10 }), 
+                   new Instructor(3,"Vergun", new HashSet<Course>{c10 }),
+                   new Instructor(4, "Tereshch", new HashSet<Course>{c2,c3,c8 })
                }
            );
         }
@@ -47,10 +47,9 @@ namespace GenAlgoLab
         private void btn_start_Click(object sender, EventArgs e)
         {
             sc.RunSimpleGA();
-            var res = sc.SchedulePopulation[39].Entries.OrderBy(x => x.time).ToList();
-            for(int i = 0; i < sc.SchedulePopulation[39].Entries.Count; i++)
+            var res = sc.Schedules.Max().Entries.OrderBy(x => x.time).ThenBy(x=>x.groupNum).ToList();
+            foreach (var item in res)
             {
-                var item = res[i];
                 switch (0)
                 {
                     case 0:

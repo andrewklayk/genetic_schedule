@@ -9,6 +9,7 @@ namespace GenAlgoLab
         //Number of classes
         static byte classes = 3;
         private byte daysCount = 5;
+        private int toNextGen = 2;
         private enum Days
         {
             Mon = 0,
@@ -28,25 +29,22 @@ namespace GenAlgoLab
         public int maxViolations = 0;
         public List<Room> Rooms;
         public List<Course> Courses;
-        public List<ConstraintBase> constraints;
         public List<Instructor> Instructors;
-        public List<Schedule> SchedulePopulation;
+        public List<Schedule> Schedules;
         private double crossoverProb = 0.5;
-        private double mutationProb = 0.1;
+        private double mutationProb = 0.1 ;
 
         public GenAlgorithm()
         {
             Courses = new List<Course>();
-            constraints = new List<ConstraintBase>();
             Instructors = new List<Instructor>();
-            SchedulePopulation = new List<Schedule>();
+            Schedules = new List<Schedule>();
         }
         public GenAlgorithm(ICollection<Course> cs, List<Room> _rooms, List<Instructor> _instructors)
         {
             Courses = cs.ToList();
-            constraints = cs.SelectMany(x => x.Constraints).ToList();
             Instructors = _instructors;
-            SchedulePopulation = new List<Schedule>();
+            Schedules = new List<Schedule>();
             Rooms = _rooms;
         }
         public void RandomInitialize()
@@ -58,33 +56,47 @@ namespace GenAlgoLab
                 foreach (var courseToAdd in Courses)
                 {
                     for (int cl = 0; cl < classes; cl++)
-                    { 
-                        var instructor = Instructors[rng.Next(Instructors.Count)];
-                        var newEntry = new CourseScheduleEntry(courseToAdd, instructor)
+                    {
+                        byte _time;
+                        var freeInstructors = new List<Instructor>();
+                        var freeRooms = new List<Room>();
+                        for (_time = 0; _time < timeSlotsCount && freeInstructors.Count == 0 && freeRooms.Count == 0; _time++)
+                        {
+                            freeInstructors = Instructors.Where(
+                                x => (x.CoursesQualifiesFor.Count == 0 || x.CoursesQualifiesFor.Contains(courseToAdd)) && !newSchedule.Entries.Exists(
+                                    e => e.time == _time && e.instructor == x
+                                )).ToList();
+                            freeRooms = Rooms.Where(
+                                x => !newSchedule.Entries.Exists(
+                                    e => e.time == _time && e.room == x
+                                )).ToList();
+                        }
+                        var newEntry = new CourseScheduleEntry(courseToAdd)
                         {
                             groupNum = cl,
-                            room = Rooms[rng.Next(Rooms.Count)],
-                            instructor = instructor,
-                            time = (byte)rng.Next(timeSlotsCount),
+                            room = freeRooms[rng.Next(freeRooms.Count)],
+                            instructor = freeInstructors[rng.Next(freeInstructors.Count)],
+                            time = _time,
                         };
                         newSchedule.Entries.Add(newEntry);
                     }
                 }
-                SchedulePopulation.Add(newSchedule);
+                Schedules.Add(newSchedule);
             }
         }
 
         private List<Schedule> FullSelectForReproduction()
         {
-            double totalFitness = SchedulePopulation.Select(x => x.Fitness).Sum();
+            double sumFitness = Schedules.Select(x => x.Fitness).Sum();
             var wheel = new List<Tuple<double, Schedule>>();
-            foreach (var s in SchedulePopulation)
+            foreach (var s in Schedules)
             {
-                wheel.Add(new Tuple<double, Schedule>(s.Fitness / totalFitness, s));
+                wheel.Add(new Tuple<double, Schedule>(s.Fitness / sumFitness, s));
             }
             var parents = new List<Schedule>();
             var rng = new Random();
-            for(int i = 0; i < SchedulePopulation.Count * 2; i++)
+            //Generate N-toNextGen pairs of parents
+            for(int i = 0; i < (Schedules.Count - toNextGen)*2; i++)
             {
                 var d = rng.NextDouble();
                 var upper = 0.0;
@@ -104,7 +116,7 @@ namespace GenAlgoLab
         private List<Schedule> FullCrossover(List<Schedule> parents)
         {
             var rng = new Random();
-            List<Schedule> children = new List<Schedule>();
+            var children = new List<Schedule>();
             for(int pairIndex = 0; pairIndex < parents.Count - 1; pairIndex += 2)
             {
                 var firstParent = parents[pairIndex];
@@ -118,7 +130,17 @@ namespace GenAlgoLab
                     var crVal = rng.NextDouble();
                     if (crVal < crossoverProb)
                     {
-                        child.Entries[i] = new CourseScheduleEntry(secondParent.Entries[i]);
+                        child.Entries[i].instructor = secondParent.Entries[i].instructor;
+                    }
+                    crVal = rng.NextDouble();
+                    if (crVal < crossoverProb)
+                    {
+                        child.Entries[i].room = secondParent.Entries[i].room;
+                    }
+                    crVal = rng.NextDouble();
+                    if (crVal < crossoverProb)
+                    {
+                        child.Entries[i].time = secondParent.Entries[i].time;
                     }
                 }
                 children.Add(child);
@@ -126,41 +148,86 @@ namespace GenAlgoLab
             return children;
         }
 
-        private void Mutate(Schedule individual)
+        private void FixAndMutate(Schedule schedule)
         {
             var rng = new Random();
-            foreach (var entry in individual.Entries)
+            foreach (var entry in schedule.Entries)
             {
                 if (rng.NextDouble() < mutationProb)
                 {
-                    entry.instructor = Instructors[rng.Next(Instructors.Count)];
-                    entry.time = (byte)rng.Next(4);
-                    entry.room = Rooms[rng.Next(Rooms.Count)];
+                    if(schedule.busyGroupCount > 0)
+                    {
+                        //Change timeslot to one when this group is free
+                        for (byte t = 0; t < timeSlotsCount; t++) {
+                            if (schedule.Entries.Exists(x => x.groupNum == entry.groupNum && x.time == t))
+                                continue;
+                            entry.time = t;
+                        }
+                    }
+                    schedule.EvaluateFitness();
+                    if(schedule.unqualCount > 0 || schedule.occTeacherCount > 0)
+                    {
+                        //Change the instructor to one that is free at that time and is qualified for this course
+                        for (byte time = 0; time < timeSlotsCount; time++)
+                        {
+                            var availableInstructors = Instructors.Where(r => r.CoursesQualifiesFor.Contains(entry.course) && 
+                            !schedule.Entries.Exists(e => e != entry && e.time == time && e.instructor == entry.instructor)).ToList();
+                            if (availableInstructors.Count == 0)
+                                continue;
+                            else
+                            {
+                                entry.time = time;
+                                entry.instructor = availableInstructors[rng.Next(availableInstructors.Count)];
+                            }
+                        }
+                    }
+                    schedule.EvaluateFitness();
+                    if (schedule.occRoomCount > 0 || schedule.capCount > 0)
+                    {
+                        //Change room to one that is free and supports the course
+                        for(byte time = 0; time < timeSlotsCount; time++)
+                        {
+                            var viableRooms = Rooms.Where(r => r.Capacity >= entry.course.Capacity && 
+                            !schedule.Entries.Exists(e => e!= entry && e.time == time && e.room == entry.room)).ToList();
+                            if (viableRooms.Count == 0)
+                                continue;
+                            else
+                            {
+                                entry.time = time;
+                                entry.room = viableRooms[rng.Next(viableRooms.Count)];
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        public long RunSimpleGA(int generationNum = 10000)
+        public long RunSimpleGA(int generationNum = 1000)
         {
             RandomInitialize();
             int i = 0;
             for (; i < generationNum; i++)
             {
-                foreach (var s in SchedulePopulation)
+                foreach (var s in Schedules)
                 {
-                    s.CalcFitness();
+                    s.EvaluateFitness();
                 }
-                if (SchedulePopulation.Max().violationCount <= maxViolations)
+                Schedules.Sort();
+                if (Schedules[popSize-1].violationCount <= maxViolations)
                     return i;
                 var selectedForReproduction = FullSelectForReproduction();
                 var children = FullCrossover(selectedForReproduction);
-                foreach(var child in children)
-                {  
-                    Mutate(child);
+                for(int j = 0; j < popSize - toNextGen; j++)
+                {
+                    Schedules[j] = children[j];
                 }
-                SchedulePopulation = children;
+                foreach(var s in Schedules)
+                {
+                    s.EvaluateFitness();
+                    FixAndMutate(s);
+                }
             }
-            SchedulePopulation.Sort();
+            Schedules.Sort();
             return i;
         }
     }
