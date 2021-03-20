@@ -17,7 +17,7 @@ namespace GenAlgoLab
         //Subject name
         public readonly string name;
         //Type: lecture or lab
-        public ClassTypes type;
+        public readonly ClassTypes classType;
         //Student count
         public readonly int capacity;
         //Lowest amount of hours the course should have for each group
@@ -28,7 +28,7 @@ namespace GenAlgoLab
             name = _name;
             capacity = _capacity;
             MinHours = minHours;
-            type = _type;
+            classType = _type;
         }
         public override string ToString()
         {
@@ -50,6 +50,7 @@ namespace GenAlgoLab
             hashCode = hashCode * -1521134295 + CourseID.GetHashCode();
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
             hashCode = hashCode * -1521134295 + capacity.GetHashCode();
+            hashCode = hashCode * -1521134295 + classType.GetHashCode();
             hashCode = hashCode * -1521134295 + MinHours.GetHashCode();
             return hashCode;
         }

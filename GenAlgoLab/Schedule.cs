@@ -54,6 +54,8 @@ namespace GenAlgoLab
                 {
                     if (entryX != entryY && entryX.day == entryY.day && entryX.time == entryY.time)
                     {
+                        if (entryX.course == entryY.course && entryX.course.classType == ClassTypes.Lec && entryX.instructor == entryY.instructor && entryX.room == entryY.room)
+                            continue;
                         if (entryX.instructor == entryY.instructor)
                         {
                             totalPenalty += BusyTeacherPenalty;

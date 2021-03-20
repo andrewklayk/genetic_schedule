@@ -247,31 +247,28 @@ namespace GenAlgoLab
             }
         }
 
-        public long RunGA(int generationNum = 1000, bool stopOnFirstDecision = false)
+        public long RunGA(int minGenerations = -1, bool stopOnFirstDecision = false)
         {
             int i = 0;
-            for (; i < generationNum; i++)
+            while(true)
             {
                 foreach (var s in schedules)
                 {
                     s.EvaluateFitness();
                 }
                 schedules.Sort();
-                if (schedules[popSize-1].violationCount <= maxViolations && stopOnFirstDecision)
+                if (schedules[popSize-1].violationCount <= maxViolations && (i >= minGenerations || minGenerations == -1))
                     return i;
                 var selectedForReproduction = FullSelectForReproduction();
                 var children = FullCrossover(selectedForReproduction);
                 for(int j = 0; j < popSize - toNextGen; j++)
                 {
                     schedules[j] = children[j];
+                    schedules[j].EvaluateFitness();
+                    MutateAndFix(schedules[j]);
                 }
-                foreach(var s in schedules)
-                {
-                    s.EvaluateFitness();
-                    MutateAndFix(s);
-                }
+                i++;
             }
-            return -1;
         }
     }
 }

@@ -40,32 +40,34 @@ namespace GenAlgoLab
             this.Instructor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tueDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.wedDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClassName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.thuDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClassName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.friDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClassName3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.critErrorsLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.monTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.monDataGridView)).BeginInit();
@@ -81,11 +83,12 @@ namespace GenAlgoLab
             // 
             // btn_start
             // 
-            this.btn_start.Location = new System.Drawing.Point(640, 13);
+            this.btn_start.Location = new System.Drawing.Point(1067, 40);
+            this.btn_start.Margin = new System.Windows.Forms.Padding(5);
             this.btn_start.Name = "btn_start";
-            this.btn_start.Size = new System.Drawing.Size(75, 23);
+            this.btn_start.Size = new System.Drawing.Size(247, 57);
             this.btn_start.TabIndex = 1;
-            this.btn_start.Text = "START";
+            this.btn_start.Text = "Старт";
             this.btn_start.UseVisualStyleBackColor = true;
             this.btn_start.Click += new System.EventHandler(this.btn_start_Click);
             // 
@@ -96,21 +99,23 @@ namespace GenAlgoLab
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Location = new System.Drawing.Point(3, 3);
+            this.tabControl1.Location = new System.Drawing.Point(5, 5);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(631, 545);
+            this.tabControl1.Size = new System.Drawing.Size(1052, 880);
             this.tabControl1.TabIndex = 2;
             // 
             // monTab
             // 
             this.monTab.Controls.Add(this.monDataGridView);
-            this.monTab.Location = new System.Drawing.Point(4, 22);
+            this.monTab.Location = new System.Drawing.Point(4, 30);
+            this.monTab.Margin = new System.Windows.Forms.Padding(5);
             this.monTab.Name = "monTab";
-            this.monTab.Padding = new System.Windows.Forms.Padding(3);
-            this.monTab.Size = new System.Drawing.Size(623, 519);
+            this.monTab.Padding = new System.Windows.Forms.Padding(5);
+            this.monTab.Size = new System.Drawing.Size(1044, 846);
             this.monTab.TabIndex = 0;
-            this.monTab.Text = "Monday";
+            this.monTab.Text = "Понеділок";
             this.monTab.UseVisualStyleBackColor = true;
             // 
             // monDataGridView
@@ -121,6 +126,8 @@ namespace GenAlgoLab
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.monDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.monDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.monDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.monDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.monDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.TimeSlot,
@@ -128,52 +135,56 @@ namespace GenAlgoLab
             this.CourseName,
             this.Room,
             this.Instructor});
+            this.monDataGridView.GridColor = System.Drawing.Color.DarkGray;
             this.monDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.monDataGridView.Margin = new System.Windows.Forms.Padding(5);
             this.monDataGridView.Name = "monDataGridView";
             this.monDataGridView.ReadOnly = true;
             this.monDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.monDataGridView.Size = new System.Drawing.Size(623, 519);
+            this.monDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.monDataGridView.Size = new System.Drawing.Size(1044, 830);
             this.monDataGridView.TabIndex = 1;
             // 
             // TimeSlot
             // 
-            this.TimeSlot.HeaderText = "Time Slot";
+            this.TimeSlot.HeaderText = "Пара";
             this.TimeSlot.Name = "TimeSlot";
             this.TimeSlot.ReadOnly = true;
             // 
             // ClassNum
             // 
-            this.ClassNum.HeaderText = "Class";
+            this.ClassNum.HeaderText = "Група";
             this.ClassNum.Name = "ClassNum";
             this.ClassNum.ReadOnly = true;
             // 
             // CourseName
             // 
-            this.CourseName.HeaderText = "Course Name";
+            this.CourseName.HeaderText = "Предмет";
             this.CourseName.Name = "CourseName";
             this.CourseName.ReadOnly = true;
             // 
             // Room
             // 
-            this.Room.HeaderText = "Room";
+            this.Room.HeaderText = "Авдиторія";
             this.Room.Name = "Room";
             this.Room.ReadOnly = true;
             // 
             // Instructor
             // 
-            this.Instructor.HeaderText = "Instructor";
+            this.Instructor.HeaderText = "Викладач";
             this.Instructor.Name = "Instructor";
             this.Instructor.ReadOnly = true;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tueDataGridView);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 30);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(623, 519);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(5);
+            this.tabPage2.Size = new System.Drawing.Size(1044, 846);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Tuesday";
+            this.tabPage2.Text = "Вівторок";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tueDataGridView
@@ -184,59 +195,63 @@ namespace GenAlgoLab
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tueDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tueDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.tueDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tueDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn4,
-            this.ClassName,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn17});
             this.tueDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.tueDataGridView.Margin = new System.Windows.Forms.Padding(5);
             this.tueDataGridView.Name = "tueDataGridView";
             this.tueDataGridView.ReadOnly = true;
             this.tueDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.tueDataGridView.Size = new System.Drawing.Size(623, 519);
-            this.tueDataGridView.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Time Slot";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // ClassName
-            // 
-            this.ClassName.HeaderText = "Class";
-            this.ClassName.Name = "ClassName";
-            this.ClassName.ReadOnly = true;
+            this.tueDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.tueDataGridView.Size = new System.Drawing.Size(1044, 830);
+            this.tueDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Course Name";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Пара";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Room";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Група";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Instructor";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Предмет";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Авдиторія";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.HeaderText = "Викладач";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.wedDataGridView);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 30);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(623, 519);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(5);
+            this.tabPage3.Size = new System.Drawing.Size(1044, 846);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Wednesday";
+            this.tabPage3.Text = "Середа";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // wedDataGridView
@@ -247,59 +262,63 @@ namespace GenAlgoLab
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.wedDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.wedDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.wedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.wedDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn8,
-            this.ClassName1,
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7});
+            this.dataGridViewTextBoxColumn7,
+            this.dataGridViewTextBoxColumn8,
+            this.dataGridViewTextBoxColumn18});
             this.wedDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.wedDataGridView.Margin = new System.Windows.Forms.Padding(5);
             this.wedDataGridView.Name = "wedDataGridView";
             this.wedDataGridView.ReadOnly = true;
             this.wedDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.wedDataGridView.Size = new System.Drawing.Size(623, 519);
+            this.wedDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.wedDataGridView.Size = new System.Drawing.Size(1044, 830);
             this.wedDataGridView.TabIndex = 2;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Time Slot";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // ClassName1
-            // 
-            this.ClassName1.HeaderText = "Class";
-            this.ClassName1.Name = "ClassName1";
-            this.ClassName1.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Course Name";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Пара";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn6
             // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Room";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Група";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn7
             // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Instructor";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Предмет";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Авдиторія";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.HeaderText = "Викладач";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
             // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.thuDataGridView);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Location = new System.Drawing.Point(4, 30);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(623, 519);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(5);
+            this.tabPage4.Size = new System.Drawing.Size(1044, 846);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Thursday";
+            this.tabPage4.Text = "Четвер";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // thuDataGridView
@@ -310,59 +329,63 @@ namespace GenAlgoLab
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.thuDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.thuDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.thuDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.thuDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn12,
-            this.ClassName2,
             this.dataGridViewTextBoxColumn9,
             this.dataGridViewTextBoxColumn10,
-            this.dataGridViewTextBoxColumn11});
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn19});
             this.thuDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.thuDataGridView.Margin = new System.Windows.Forms.Padding(5);
             this.thuDataGridView.Name = "thuDataGridView";
             this.thuDataGridView.ReadOnly = true;
             this.thuDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.thuDataGridView.Size = new System.Drawing.Size(623, 516);
+            this.thuDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.thuDataGridView.Size = new System.Drawing.Size(1044, 830);
             this.thuDataGridView.TabIndex = 2;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Time Slot";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // ClassName2
-            // 
-            this.ClassName2.HeaderText = "Class";
-            this.ClassName2.Name = "ClassName2";
-            this.ClassName2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn9
             // 
-            this.dataGridViewTextBoxColumn9.HeaderText = "Course Name";
+            this.dataGridViewTextBoxColumn9.HeaderText = "Пара";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             this.dataGridViewTextBoxColumn9.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn10
             // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Room";
+            this.dataGridViewTextBoxColumn10.HeaderText = "Група";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn11
             // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "Instructor";
+            this.dataGridViewTextBoxColumn11.HeaderText = "Предмет";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Авдиторія";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.HeaderText = "Викладач";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
             // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.friDataGridView);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Location = new System.Drawing.Point(4, 30);
+            this.tabPage5.Margin = new System.Windows.Forms.Padding(5);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(623, 519);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(5);
+            this.tabPage5.Size = new System.Drawing.Size(1044, 846);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Friday";
+            this.tabPage5.Text = "П\'ятниця";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // friDataGridView
@@ -373,57 +396,88 @@ namespace GenAlgoLab
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.friDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.friDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.friDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.friDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn16,
-            this.ClassName3,
             this.dataGridViewTextBoxColumn13,
             this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15});
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn20});
             this.friDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.friDataGridView.Margin = new System.Windows.Forms.Padding(5);
             this.friDataGridView.Name = "friDataGridView";
             this.friDataGridView.ReadOnly = true;
             this.friDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.friDataGridView.Size = new System.Drawing.Size(623, 519);
+            this.friDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.friDataGridView.Size = new System.Drawing.Size(1044, 830);
             this.friDataGridView.TabIndex = 2;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.HeaderText = "Time Slot";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            // 
-            // ClassName3
-            // 
-            this.ClassName3.HeaderText = "Class";
-            this.ClassName3.Name = "ClassName3";
-            this.ClassName3.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn13
             // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Course Name";
+            this.dataGridViewTextBoxColumn13.HeaderText = "Пара";
             this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             this.dataGridViewTextBoxColumn13.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn14
             // 
-            this.dataGridViewTextBoxColumn14.HeaderText = "Room";
+            this.dataGridViewTextBoxColumn14.HeaderText = "Група";
             this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
             this.dataGridViewTextBoxColumn14.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn15
             // 
-            this.dataGridViewTextBoxColumn15.HeaderText = "Instructor";
+            this.dataGridViewTextBoxColumn15.HeaderText = "Предмет";
             this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
             this.dataGridViewTextBoxColumn15.ReadOnly = true;
             // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "Авдиторія";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.HeaderText = "Викладач";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1067, 107);
+            this.button1.Margin = new System.Windows.Forms.Padding(5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(247, 61);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Ще 100 ітерацій";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // critErrorsLabel
+            // 
+            this.critErrorsLabel.AutoEllipsis = true;
+            this.critErrorsLabel.AutoSize = true;
+            this.critErrorsLabel.Font = new System.Drawing.Font("Century Gothic", 10F);
+            this.critErrorsLabel.Location = new System.Drawing.Point(1065, 173);
+            this.critErrorsLabel.Name = "critErrorsLabel";
+            this.critErrorsLabel.Size = new System.Drawing.Size(52, 19);
+            this.critErrorsLabel.TabIndex = 4;
+            this.critErrorsLabel.Text = "label1";
+            this.critErrorsLabel.Visible = false;
+            // 
             // MainPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 550);
+            this.ClientSize = new System.Drawing.Size(1333, 888);
+            this.Controls.Add(this.critErrorsLabel);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btn_start);
+            this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MainPage";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -439,6 +493,7 @@ namespace GenAlgoLab
             this.tabPage5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.friDataGridView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -448,38 +503,40 @@ namespace GenAlgoLab
         private System.Windows.Forms.TabPage monTab;
         private System.Windows.Forms.DataGridView monDataGridView;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView tueDataGridView;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.DataGridView wedDataGridView;
         private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.DataGridView thuDataGridView;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.DataGridView friDataGridView;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn TimeSlot;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClassNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn CourseName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Room;
         private System.Windows.Forms.DataGridViewTextBoxColumn Instructor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClassName;
+        private System.Windows.Forms.DataGridView tueDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClassName1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
+        private System.Windows.Forms.DataGridView wedDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClassName2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn18;
+        private System.Windows.Forms.DataGridView thuDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClassName3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridView friDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
+        private System.Windows.Forms.Label critErrorsLabel;
     }
 }
 

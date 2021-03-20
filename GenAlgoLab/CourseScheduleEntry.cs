@@ -34,7 +34,7 @@ namespace GenAlgoLab
             if (course.capacity == room.Capacity)
                 return 0;
             if (course.capacity > room.Capacity)
-                return course.capacity / room.Capacity;
+                return (float)course.capacity / room.Capacity;
             else
                 return (float)room.Capacity / course.capacity;
         }
