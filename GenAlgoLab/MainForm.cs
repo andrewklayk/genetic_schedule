@@ -20,18 +20,18 @@ namespace GenAlgoLab
         bool first = true;
         private void Form1_Load(object sender, EventArgs e)
         {
-            Course is_p = new Course(0, "IS Lec", 30, 2, ClassTypes.Lab);
-            Course is_l = new Course(1, "IS Lab", 90, 1, ClassTypes.Lec);
-            Course pr_p = new Course(2, "Pravo Lec", 30, 2,ClassTypes.Lab);
-            Course pr_l = new Course(3, "Pravo Lab", 30, 2,ClassTypes.Lec);
-            Course kp_p = new Course(4, "KPtaLP Lec", 50, 1, ClassTypes.Lab);
-            Course kp_l = new Course(5, "KPtaLP Lab", 50, 1, ClassTypes.Lec);
-            Course bi_p = new Course(6, "BI Lec", 60, 1, ClassTypes.Lab);
-            Course bi_l = new Course(7, "BI Lab", 60, 1, ClassTypes.Lec);
+            Course is_p = new Course(0, "IS Lab", 30, 2, ClassTypes.Lab);
+            Course is_l = new Course(1, "IS Lec", 90, 1, ClassTypes.Lec);
+            Course pr_p = new Course(2, "Pravo Lab", 30, 2,ClassTypes.Lab);
+            Course pr_l = new Course(3, "Pravo Lec", 30, 2,ClassTypes.Lec);
+            Course kp_p = new Course(4, "KPtaLP Lab", 30, 1, ClassTypes.Lab);
+            Course kp_l = new Course(5, "KPtaLP Lec", 30, 1, ClassTypes.Lec);
+            Course bi_p = new Course(6, "BI Lab", 30, 1, ClassTypes.Lab);
+            Course bi_l = new Course(7, "BI Lec", 30, 1, ClassTypes.Lec);
             Course ms_l = new Course(9, "MSP Lec", 30, 1, ClassTypes.Lec);
             Course ks_l = new Course(9, "KSSQL Lec", 30, 2, ClassTypes.Lec);
-            Course mn_p = new Course(10, "Manag Lec", 30, 1, ClassTypes.Lab);
-            Course mn_l = new Course(10, "Manag Lab", 30, 1, ClassTypes.Lec);
+            Course mn_p = new Course(10, "Manag Lab", 30, 1, ClassTypes.Lab);
+            Course mn_l = new Course(10, "Manag Lec", 90, 1, ClassTypes.Lec);
             //Course rf_l = new Course(11, "Refactoring", 30, 2, ClassTypes.Lec);
             //Course pr_l = new Course(12, "Parallel", 30, 2, ClassTypes.Lec);
             //Course qn_l = new Course(13, "Quant", 30, 2, ClassTypes.Lec);

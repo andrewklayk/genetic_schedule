@@ -31,7 +31,7 @@ namespace GenAlgoLab
         {
             this.btn_start = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.monTab = new System.Windows.Forms.TabPage();
             this.monDataGridView = new System.Windows.Forms.DataGridView();
             this.TimeSlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClassNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,7 +67,7 @@ namespace GenAlgoLab
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.monTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.monDataGridView)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tueDataGridView)).BeginInit();
@@ -91,7 +91,7 @@ namespace GenAlgoLab
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.monTab);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
@@ -102,16 +102,16 @@ namespace GenAlgoLab
             this.tabControl1.Size = new System.Drawing.Size(631, 545);
             this.tabControl1.TabIndex = 2;
             // 
-            // tabPage1
+            // monTab
             // 
-            this.tabPage1.Controls.Add(this.monDataGridView);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(623, 519);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.monTab.Controls.Add(this.monDataGridView);
+            this.monTab.Location = new System.Drawing.Point(4, 22);
+            this.monTab.Name = "monTab";
+            this.monTab.Padding = new System.Windows.Forms.Padding(3);
+            this.monTab.Size = new System.Drawing.Size(623, 519);
+            this.monTab.TabIndex = 0;
+            this.monTab.Text = "Monday";
+            this.monTab.UseVisualStyleBackColor = true;
             // 
             // monDataGridView
             // 
@@ -171,9 +171,9 @@ namespace GenAlgoLab
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(623, 420);
+            this.tabPage2.Size = new System.Drawing.Size(623, 519);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Tuesday";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tueDataGridView
@@ -195,7 +195,7 @@ namespace GenAlgoLab
             this.tueDataGridView.Name = "tueDataGridView";
             this.tueDataGridView.ReadOnly = true;
             this.tueDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.tueDataGridView.Size = new System.Drawing.Size(623, 420);
+            this.tueDataGridView.Size = new System.Drawing.Size(623, 519);
             this.tueDataGridView.TabIndex = 1;
             // 
             // dataGridViewTextBoxColumn4
@@ -234,9 +234,9 @@ namespace GenAlgoLab
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(623, 420);
+            this.tabPage3.Size = new System.Drawing.Size(623, 519);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.Text = "Wednesday";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // wedDataGridView
@@ -258,7 +258,7 @@ namespace GenAlgoLab
             this.wedDataGridView.Name = "wedDataGridView";
             this.wedDataGridView.ReadOnly = true;
             this.wedDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.wedDataGridView.Size = new System.Drawing.Size(623, 420);
+            this.wedDataGridView.Size = new System.Drawing.Size(623, 519);
             this.wedDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn8
@@ -297,9 +297,9 @@ namespace GenAlgoLab
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(623, 420);
+            this.tabPage4.Size = new System.Drawing.Size(623, 519);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.Text = "Thursday";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // thuDataGridView
@@ -321,7 +321,7 @@ namespace GenAlgoLab
             this.thuDataGridView.Name = "thuDataGridView";
             this.thuDataGridView.ReadOnly = true;
             this.thuDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.thuDataGridView.Size = new System.Drawing.Size(623, 420);
+            this.thuDataGridView.Size = new System.Drawing.Size(623, 516);
             this.thuDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn12
@@ -360,9 +360,9 @@ namespace GenAlgoLab
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(623, 420);
+            this.tabPage5.Size = new System.Drawing.Size(623, 519);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "tabPage5";
+            this.tabPage5.Text = "Friday";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // friDataGridView
@@ -384,7 +384,7 @@ namespace GenAlgoLab
             this.friDataGridView.Name = "friDataGridView";
             this.friDataGridView.ReadOnly = true;
             this.friDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.friDataGridView.Size = new System.Drawing.Size(623, 420);
+            this.friDataGridView.Size = new System.Drawing.Size(623, 519);
             this.friDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn16
@@ -428,7 +428,7 @@ namespace GenAlgoLab
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.monTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.monDataGridView)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tueDataGridView)).EndInit();
@@ -445,7 +445,7 @@ namespace GenAlgoLab
         #endregion
         private System.Windows.Forms.Button btn_start;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage monTab;
         private System.Windows.Forms.DataGridView monDataGridView;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView tueDataGridView;

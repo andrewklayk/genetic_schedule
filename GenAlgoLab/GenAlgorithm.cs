@@ -46,7 +46,7 @@ namespace GenAlgoLab
                                         e => e.day == day && e.time == time && e.room == x
                                     )).ToList();
         }
-        public List<Instructor> GetFreeQualifiedInstructors(Schedule s, Course c, byte day, byte time, int cap)
+        public List<Instructor> GetFreeQualifiedInstructors(Schedule s, Course c, byte day, byte time)
         {
             return instructors.Where(x => (x.CoursesQualifiesFor.Count == 0 || x.CoursesQualifiesFor.Contains(c)) && !s.Entries.Exists(
                                         e => e.day == day && e.time == time && e.instructor == x
@@ -71,7 +71,7 @@ namespace GenAlgoLab
                             while (_day < daysCount)
                             {
                                 freeRooms = GetFreeRooms(newSchedule, _day, _time, course.capacity);
-                                freeInstructors = GetFreeQualifiedInstructors(newSchedule, course, _day, _time, course.capacity);
+                                freeInstructors = GetFreeQualifiedInstructors(newSchedule, course, _day, _time);
                                 if (freeRooms.Count > 0 && freeInstructors.Count > 0)
                                     break;
                                 else
@@ -164,7 +164,7 @@ namespace GenAlgoLab
             return children;
         }
 
-        private void Fix(Schedule schedule)
+        private void MutateAndFix(Schedule schedule)
         {
             var rng = new Random();
             foreach (var entry in schedule.Entries)
@@ -191,7 +191,7 @@ namespace GenAlgoLab
                 {
                     byte d = 0;
                     byte t = 0;
-                    var freeInstructors = GetFreeQualifiedInstructors(schedule, entry.course, d, t, entry.course.capacity);
+                    var freeInstructors = GetFreeQualifiedInstructors(schedule, entry.course, d, t);
                     while (freeInstructors.Count == 0)
                     {
                         t++;
@@ -200,29 +200,11 @@ namespace GenAlgoLab
                             d++;
                             t = 0;
                         }
-                        freeInstructors = GetFreeQualifiedInstructors(schedule, entry.course, d, t, entry.course.capacity);
+                        freeInstructors = GetFreeQualifiedInstructors(schedule, entry.course, d, t);
                     }
                     entry.time = t;
                     entry.day = d;
                     entry.instructor = freeInstructors[rng.Next(freeInstructors.Count)];
-                    //Change the instructor to one that is free at that time and is qualified for this course
-                    /*for (byte time = 0, day = 0; time < timeSlotsCount && day < daysCount; time++)
-                    {
-                        var availableInstructors = Instructors.Where(r => r.CoursesQualifiesFor.Contains(entry.course) && 
-                        !schedule.Entries.Exists(e => e != entry && e.day == day && e.time == time && e.instructor == entry.instructor)).ToList();
-                        if (availableInstructors.Count > 0)
-                        { 
-                            entry.day = day;
-                            entry.time = time;
-                            entry.instructor = availableInstructors[rng.Next(availableInstructors.Count)];
-                            break;
-                        }
-                        if (time == timeSlotsCount - 1)
-                        {
-                            day++;
-                            time = 0;
-                        }
-                    }*/
                     schedule.EvaluateFitness();
                 }
                 if (rng.NextDouble() < mutationProb || schedule.occRoomCount > 0 || schedule.capCount > 0)
@@ -286,7 +268,7 @@ namespace GenAlgoLab
                 foreach(var s in schedules)
                 {
                     s.EvaluateFitness();
-                    Fix(s);
+                    MutateAndFix(s);
                 }
             }
             return -1;
