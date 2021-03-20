@@ -48,16 +48,15 @@ namespace GenAlgoLab
                    room.Equals(entry.room) &&
                    instructor.Equals(entry.instructor);
         }
-
         public override int GetHashCode()
         {
             int hashCode = -1715831775;
             hashCode = hashCode * -1521134295 + group.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<Course>.Default.GetHashCode(course);
+            hashCode = hashCode * -1521134295 + course.GetHashCode();
             hashCode = hashCode * -1521134295 + day.GetHashCode();
             hashCode = hashCode * -1521134295 + time.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<Room>.Default.GetHashCode(room);
-            hashCode = hashCode * -1521134295 + EqualityComparer<Instructor>.Default.GetHashCode(instructor);
+            hashCode = hashCode * -1521134295 + room.GetHashCode();
+            hashCode = hashCode * -1521134295 + instructor.GetHashCode();
             return hashCode;
         }
     }

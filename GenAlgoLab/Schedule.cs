@@ -12,7 +12,7 @@ namespace GenAlgoLab
         private readonly int BusyGroupPenalty = 1000;
         private readonly int OverRoomSizePenalty = 20;
         private readonly int NotQualifiedPenalty = 20;
-        public double violationCount = 0;
+        public double hardViolationCount = 0;
         public uint unqualCount = 0;
         public double occRoomCount = 0;
         public double occTeacherCount = 0;
@@ -24,7 +24,7 @@ namespace GenAlgoLab
         public void EvaluateFitness()
         {
             double totalPenalty = 0;
-            violationCount = 0;
+            hardViolationCount = 0;
             unqualCount = 0;
             occRoomCount = 0;
             capCount = 0;
@@ -37,7 +37,7 @@ namespace GenAlgoLab
                 totalPenalty += OverRoomSizePenalty * excCap;
                 if (entryX.room.Capacity < entryX.course.capacity)
                 {
-                    violationCount++;
+                    hardViolationCount++;
                     capCount++;
                 }
                 if(entryX.room.Capacity > entryX.course.capacity)
@@ -47,7 +47,7 @@ namespace GenAlgoLab
                 if (entryX.HasUnqualifiedInstructor())
                 {
                     totalPenalty += NotQualifiedPenalty;
-                    violationCount++;
+                    hardViolationCount++;
                     unqualCount++;
                 }
                 foreach (var entryY in Entries)
@@ -59,19 +59,19 @@ namespace GenAlgoLab
                         if (entryX.instructor == entryY.instructor)
                         {
                             totalPenalty += BusyTeacherPenalty;
-                            violationCount+=0.5;
+                            hardViolationCount+=0.5;
                             occTeacherCount+=0.5;
                         }
                         if (entryX.room == entryY.room)
                         {
                             totalPenalty += BusyRoomPenalty;
-                            violationCount+=0.5;
+                            hardViolationCount+=0.5;
                             occRoomCount+=0.5;
                         }
                         if(entryX.group == entryY.group)
                         {
                             totalPenalty += BusyGroupPenalty;
-                            violationCount+=0.5;
+                            hardViolationCount+=0.5;
                             busyGroupCount+=0.5;
                         }
                     }

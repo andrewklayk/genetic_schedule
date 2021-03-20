@@ -13,7 +13,7 @@ namespace GenAlgoLab
     }
     public class Course
     {
-        readonly ushort CourseID;
+        private ushort CourseID;
         //Subject name
         public readonly string name;
         //Type: lecture or lab

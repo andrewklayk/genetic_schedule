@@ -16,38 +16,30 @@ namespace GenAlgoLab
         // 4 - 14:05 - 15:40
         static int timeSlotsCount = 4;
         //Number of schedules (population size)
+        public int maxHardViolations = 0;
         static int popSize = 40;
         //Chromosome population
-        public List<Schedule> schedules;
-        public int maxViolations = 0;
-        public List<Room> rooms;
-        public HashSet<Course> courses;
-        public HashSet<Group> groups;
-        public List<Instructor> instructors;
+        public List<Schedule> schedules = new List<Schedule>();
+        public HashSet<Course> courses = new HashSet<Course>();
+        public HashSet<Group> groups = new HashSet<Group>();
+        public List<Room> rooms = new List<Room>();
+        public List<Instructor> instructors = new List<Instructor>();
         private double crossoverProb = 0.5;
-        private double mutationProb = 0.1 ;
-
-        public GenAlgorithm()
-        {
-            courses = new HashSet<Course>();
-            instructors = new List<Instructor>();
-            schedules = new List<Schedule>();
-        }
-        public GenAlgorithm(ICollection<Group> _groups, ICollection<Course> _courses, List<Room> _rooms, List<Instructor> _instructors)
+        private double mutationProb = 0.1;
+        public GenAlgorithm(ICollection<Group> _groups, ICollection<Course> _courses, ICollection<Room> _rooms, ICollection<Instructor> _instructors)
         {
             groups = _groups.ToHashSet();
             courses = _courses.ToHashSet();
-            instructors = _instructors;
-            schedules = new List<Schedule>();
-            rooms = _rooms;
+            instructors = _instructors.ToList();
+            rooms = _rooms.ToList();
         }
-        public List<Room> GetFreeRooms(Schedule s, byte day, byte time, int cap)
+        private List<Room> GetFreeRooms(Schedule s, byte day, byte time, int cap)
         {
             return rooms.Where(x => x.Capacity >= cap && !s.Entries.Exists(
                                         e => e.day == day && e.time == time && e.room == x
                                     )).ToList();
         }
-        public List<Instructor> GetFreeQualifiedInstructors(Schedule s, Course c, byte day, byte time)
+        private List<Instructor> GetFreeQualifiedInstructors(Schedule s, Course c, byte day, byte time)
         {
             return instructors.Where(x => (x.CoursesQualifiesFor.Count == 0 || x.CoursesQualifiesFor.Contains(c)) && !s.Entries.Exists(
                                         e => e.day == day && e.time == time && e.instructor == x
@@ -128,36 +120,35 @@ namespace GenAlgoLab
             }
             return parents;
         }
-
         private List<Schedule> FullCrossover(List<Schedule> parents)
         {
             var rng = new Random();
             var children = new List<Schedule>();
             for(int pairIndex = 0; pairIndex < parents.Count - 1; pairIndex += 2)
             {
-                var firstParent = parents[pairIndex];
-                var secondParent = parents[pairIndex + 1];
+                var parOne = parents[pairIndex];
+                var parTwo = parents[pairIndex + 1];
                 var child = new Schedule(id: 0);
-                if (firstParent.Entries.Count != secondParent.Entries.Count)
+                if (parOne.Entries.Count != parTwo.Entries.Count)
                     throw new ArgumentException("Different chromosome count in individuals!");
-                for (int i = 0; i < firstParent.Entries.Count; i++)
+                for (int i = 0; i < parOne.Entries.Count; i++)
                 {
-                    child.Entries.Add(new CourseScheduleEntry(firstParent.Entries[i]));
+                    child.Entries.Add(new CourseScheduleEntry(parOne.Entries[i]));
                     var crVal = rng.NextDouble();
                     if (crVal < crossoverProb)
                     {
-                        child.Entries[i].instructor = secondParent.Entries[i].instructor;
+                        child.Entries[i].instructor = parTwo.Entries[i].instructor;
                     }
                     crVal = rng.NextDouble();
                     if (crVal < crossoverProb)
                     {
-                        child.Entries[i].room = secondParent.Entries[i].room;
+                        child.Entries[i].room = parTwo.Entries[i].room;
                     }
                     crVal = rng.NextDouble();
                     if (crVal < crossoverProb)
                     {
-                        child.Entries[i].day = secondParent.Entries[i].day;
-                        child.Entries[i].time = secondParent.Entries[i].time;
+                        child.Entries[i].day = parTwo.Entries[i].day;
+                        child.Entries[i].time = parTwo.Entries[i].time;
                     }
                 }
                 children.Add(child);
@@ -210,24 +201,6 @@ namespace GenAlgoLab
                 }
                 if (rng.NextDouble() < mutationProb || schedule.occRoomCount > 0 || schedule.capCount > 0)
                 {
-                    //Change room to one that is free and supports the course
-                    /*for(byte time = 0, day = 0; time < timeSlotsCount && day < daysCount; time++)
-                    {
-                        var viableRooms = Rooms.Where(r => r.capacity >= entry.course.capacity &&
-                        !schedule.Entries.Exists(e => e != entry && e.day == day && e.time == time && e.room == entry.room)).ToList();
-                        if(viableRooms.Count > 0)
-                        {
-                            entry.day = day;
-                            entry.time = time;
-                            entry.room = viableRooms[rng.Next(viableRooms.Count)];
-                            break;
-                        }
-                        if (time == timeSlotsCount - 1)
-                        {
-                            day++;
-                            time = 0;
-                        }
-                    }*/
                     byte d = 0;
                     byte t = 0;
                     var freeRooms = GetFreeRooms(schedule, d, t, entry.course.capacity);
@@ -259,7 +232,7 @@ namespace GenAlgoLab
                 }
                 //Determine if a good enough solution exists already
                 schedules.Sort();
-                if (schedules[popSize-1].violationCount <= maxViolations && (i >= minGenerations || minGenerations == -1))
+                if (schedules[popSize - 1].hardViolationCount <= maxHardViolations && (minGenerations == -1 || i >= minGenerations))
                     return schedules[popSize - 1];
                 //Perform selection
                 var selectedForReproduction = FullSelectForReproduction();

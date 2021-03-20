@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GenAlgoLab
 {
     public class Group : IComparable
     {
-        private int GroupID;
-        public string groupName;
+        private readonly int GroupID;
+        public readonly string groupName;
+        //Courses assigned to this group
         public HashSet<Course> courses;
         public Group(int id, string name)
         {
@@ -29,14 +28,12 @@ namespace GenAlgoLab
                 throw new ArgumentException("Object is not Group!");
             return GroupID.CompareTo(otherGroup.GroupID);
         }
-
         public override bool Equals(object obj)
         {
             return obj is Group group &&
                    GroupID == group.GroupID &&
                    groupName == group.groupName;
         }
-
         public override int GetHashCode()
         {
             int hashCode = -1062870623;
