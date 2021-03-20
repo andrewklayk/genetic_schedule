@@ -9,7 +9,7 @@ namespace GenAlgoLab
     public class Instructor
     {
         readonly int InstructorID;
-        readonly public string FullName;
+        public readonly string FullName;
         //Courses that this instructor can teach
         public HashSet<Course> CoursesQualifiesFor;
         public Instructor(int id)
@@ -18,17 +18,13 @@ namespace GenAlgoLab
             FullName = id.ToString();
             CoursesQualifiesFor = new HashSet<Course>();
         }
-        public Instructor(int id, string name)
+        public Instructor(int id, string name) : this(id)
         {
-            InstructorID = id;
             FullName = name;
-            CoursesQualifiesFor = new HashSet<Course>();
         }
-        public Instructor(int id, string name, HashSet<Course> courses)
+        public Instructor(int id, string name, IEnumerable<Course> courses) :this(id, name)
         {
-            InstructorID = id;
-            FullName = name;
-            CoursesQualifiesFor = courses;
+            CoursesQualifiesFor = courses.ToHashSet();
         }
 
         public override string ToString()

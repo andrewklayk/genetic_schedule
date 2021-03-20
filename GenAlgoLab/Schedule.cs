@@ -17,6 +17,7 @@ namespace GenAlgoLab
         public double occRoomCount = 0;
         public double occTeacherCount = 0;
         public uint capCount = 0;
+        public uint softCapCount = 0;
         public double busyGroupCount = 0;
         public double Fitness = 0;
         public List<CourseScheduleEntry> Entries;
@@ -27,16 +28,21 @@ namespace GenAlgoLab
             unqualCount = 0;
             occRoomCount = 0;
             capCount = 0;
+            softCapCount = 0;
             occTeacherCount = 0;
             busyGroupCount = 0;
             foreach (var entryX in Entries)
             {
                 var excCap = entryX.GetCapacityPenaltyMultiplier();
                 totalPenalty += OverRoomSizePenalty * excCap;
-                if (entryX.room.Capacity < entryX.course.Capacity)
+                if (entryX.room.Capacity < entryX.course.capacity)
                 {
                     violationCount++;
                     capCount++;
+                }
+                if(entryX.room.Capacity > entryX.course.capacity)
+                {
+                    softCapCount++;
                 }
                 if (entryX.HasUnqualifiedInstructor())
                 {
@@ -46,7 +52,7 @@ namespace GenAlgoLab
                 }
                 foreach (var entryY in Entries)
                 {
-                    if (entryX != entryY && entryX.time == entryY.time)
+                    if (entryX != entryY && entryX.day == entryY.day && entryX.time == entryY.time)
                     {
                         if (entryX.instructor == entryY.instructor)
                         {
@@ -60,7 +66,7 @@ namespace GenAlgoLab
                             violationCount+=0.5;
                             occRoomCount+=0.5;
                         }
-                        if(entryX.groupNum == entryY.groupNum)
+                        if(entryX.group == entryY.group)
                         {
                             totalPenalty += BusyGroupPenalty;
                             violationCount+=0.5;
@@ -84,11 +90,11 @@ namespace GenAlgoLab
             var objSchedule = obj as Schedule;
             if (obj == null)
                 throw new ArgumentException("obj is not a Schedule");
-            return this.Fitness.CompareTo(objSchedule.Fitness);
+            return Fitness.CompareTo(objSchedule.Fitness);
         }
-        public string listViolations()
+        public string ListViolations()
         {
-            return string.Format("Busy room: {0}, Busy teacher: {1}, Busy group {2}, Over cap: {3}, Unqualified teacher: {4}", occRoomCount, occTeacherCount, busyGroupCount, capCount, unqualCount);
+            return string.Format("Busy room: {0}, Busy teacher: {1}, Busy group {2}, Over cap: {3}, Under cap: {4}, Unqualified teacher: {5}", occRoomCount, occTeacherCount, busyGroupCount, capCount, softCapCount, unqualCount);
         }
     }
 }

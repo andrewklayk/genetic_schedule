@@ -6,25 +6,33 @@ using System.Threading.Tasks;
 
 namespace GenAlgoLab
 {
+    public enum ClassTypes
+    {
+        Lec,
+        Lab
+    }
     public class Course
     {
         readonly ushort CourseID;
         //Subject name
-        readonly public string Name;
+        public readonly string name;
+        //Type: lecture or lab
+        public ClassTypes type;
         //Student count
-        readonly public int Capacity;
+        public readonly int capacity;
         //Lowest amount of hours the course should have for each group
-        readonly public int MinHours;
-        public Course(ushort _id, string name, int cap, int minHours)
+        public readonly int MinHours;
+        public Course(ushort _id, string _name, int _capacity, int minHours, ClassTypes _type = ClassTypes.Lab)
         {
             CourseID = _id;
-            Name = name;
-            Capacity = cap;
+            name = _name;
+            capacity = _capacity;
             MinHours = minHours;
+            type = _type;
         }
         public override string ToString()
         {
-            return string.Format("Id: {0}, Name: {1}, Cap: {2}", CourseID, Name, Capacity);
+            return string.Format("Id: {0}, Name: {1}, Cap: {2}", CourseID, name, capacity);
         }
         public override bool Equals(object obj)
         {
@@ -33,15 +41,15 @@ namespace GenAlgoLab
             if (!(obj is Course objCourse))
                 return false;
             else
-                return objCourse.CourseID == this.CourseID;
+                return objCourse.GetHashCode() == this.GetHashCode();
         }
 
         public override int GetHashCode()
         {
             int hashCode = -1506781142;
             hashCode = hashCode * -1521134295 + CourseID.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
-            hashCode = hashCode * -1521134295 + Capacity.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
+            hashCode = hashCode * -1521134295 + capacity.GetHashCode();
             hashCode = hashCode * -1521134295 + MinHours.GetHashCode();
             return hashCode;
         }

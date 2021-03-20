@@ -5,35 +5,60 @@ namespace GenAlgoLab
 {
     public class CourseScheduleEntry
     {
-        public int groupNum;
+        public Group group;
         public Course course;
+        public byte day;
         public byte time;
         public Room room;
         public Instructor instructor;
-        public CourseScheduleEntry(Course _course)
+        public CourseScheduleEntry(Group _group, Course _course)
         {
+            group = _group;
             course = _course;
         }
         public CourseScheduleEntry(CourseScheduleEntry x)
         {
-            groupNum = x.groupNum;
+            group = x.group;
             course = x.course;
             instructor = x.instructor;
             time = x.time;
+            day = x.day;
             room = x.room;
-        }
-        public double GetCapacityPenaltyMultiplier()
-        {
-            if (course.Capacity == room.Capacity)
-                return 0;
-            if (course.Capacity > room.Capacity)
-                return course.Capacity / room.Capacity;
-            else
-                return (float)room.Capacity / course.Capacity;
         }
         public bool HasUnqualifiedInstructor()
         {
             return !(instructor.CoursesQualifiesFor.Count == 0 || instructor.CoursesQualifiesFor.Contains(course));
+        }
+        public double GetCapacityPenaltyMultiplier()
+        {
+            if (course.capacity == room.Capacity)
+                return 0;
+            if (course.capacity > room.Capacity)
+                return course.capacity / room.Capacity;
+            else
+                return (float)room.Capacity / course.capacity;
+        }
+        public override bool Equals(object obj)
+        {
+            return obj is CourseScheduleEntry entry &&
+                   group == entry.group &&
+                   course.Equals(entry.course) &&
+                   day == entry.day &&
+                   time == entry.time &&
+                   room.Equals(entry.room) &&
+                   instructor.Equals(entry.instructor);
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1715831775;
+            hashCode = hashCode * -1521134295 + group.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Course>.Default.GetHashCode(course);
+            hashCode = hashCode * -1521134295 + day.GetHashCode();
+            hashCode = hashCode * -1521134295 + time.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Room>.Default.GetHashCode(room);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Instructor>.Default.GetHashCode(instructor);
+            return hashCode;
         }
     }
 }
