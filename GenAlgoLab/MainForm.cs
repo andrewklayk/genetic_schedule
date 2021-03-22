@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GenAlgoLab
 {
-    public partial class MainPage : Form
+    public partial class MainForm : Form
     {
         static GenAlgorithm sc;
-        public MainPage()
+        public MainForm()
         {
             InitializeComponent();
         }
-        bool first = true;
         private void Form1_Load(object sender, EventArgs e)
         {
             Course is_p = new Course(0, "IS Lab", 30, 2, ClassTypes.Lab);
@@ -50,7 +45,7 @@ namespace GenAlgoLab
                    new Room(15, 90), new Room(16, 90)
                },
                _instructors: new List<Instructor> {
-                   new Instructor(9, "Glybovecj", new HashSet<Course>(){is_l}),
+                   new Instructor(9, "Glybovecj", new HashSet<Course>{is_l}),
                    new Instructor(0, "Fedorus", new HashSet<Course>{is_p}),
                    new Instructor(1,"Bohdan", new HashSet<Course>{ pr_p, pr_l}),
                    new Instructor(2,"Tkachenko", new HashSet<Course>{ kp_l,ks_l, kp_p}),
@@ -66,21 +61,21 @@ namespace GenAlgoLab
 
         private void btn_start_Click(object sender, EventArgs e)
         {
-            if (first)
-            {
-                sc.RandomInitialize();
-                first = false;
-                button1.Visible = true;
-                btn_start.Text = "Заново";
-            }
-            sc.RunGA(stopOnFirstDecision: true);
-            PopulateGrids(sc.schedules.Max());
+            sc.RandomInitialize();
+            button1.Visible = true;
+            btn_start.Text = "Заново";
+            Cursor.Current = Cursors.WaitCursor;
+            var bestSchedule = sc.RunGA();
+            Cursor.Current = Cursors.Default;
+            PopulateGrids(bestSchedule);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void continue_100_btn_Click(object sender, EventArgs e)
         {
-            sc.RunGA(minGenerations: 100);
-            PopulateGrids(sc.schedules.Max());
+            Cursor.Current = Cursors.WaitCursor;
+            var bestSchedule = sc.RunGA(minGenerations: 100);
+            Cursor.Current = Cursors.Default;
+            PopulateGrids(bestSchedule);
         }
 
         private void PopulateGrids(Schedule schedule)
@@ -115,7 +110,7 @@ namespace GenAlgoLab
                 }
             }
             critErrorsLabel.Visible = true;
-            critErrorsLabel.Text = String.Format("{0} порушень жорстких обмежень, \n{1} порушень м'яких обмежень", schedule.violationCount, schedule.softCapCount);
+            critErrorsLabel.Text = string.Format("{0} порушень жорстких обмежень, \n{1} порушень м'яких обмежень", schedule.hardViolationCount, schedule.softCapCount);
         }
     }
 }

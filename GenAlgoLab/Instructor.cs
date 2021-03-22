@@ -8,7 +8,7 @@ namespace GenAlgoLab
 {
     public class Instructor
     {
-        readonly int InstructorID;
+        private readonly int InstructorID;
         public readonly string FullName;
         //Courses that this instructor can teach
         public HashSet<Course> CoursesQualifiesFor;

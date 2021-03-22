@@ -1,7 +1,7 @@
 ﻿
 namespace GenAlgoLab
 {
-    partial class MainPage
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -142,7 +142,7 @@ namespace GenAlgoLab
             this.monDataGridView.ReadOnly = true;
             this.monDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.monDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.monDataGridView.Size = new System.Drawing.Size(1044, 830);
+            this.monDataGridView.Size = new System.Drawing.Size(1044, 846);
             this.monDataGridView.TabIndex = 1;
             // 
             // TimeSlot
@@ -195,6 +195,7 @@ namespace GenAlgoLab
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tueDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tueDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.tueDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.tueDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tueDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -209,7 +210,7 @@ namespace GenAlgoLab
             this.tueDataGridView.ReadOnly = true;
             this.tueDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.tueDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.tueDataGridView.Size = new System.Drawing.Size(1044, 830);
+            this.tueDataGridView.Size = new System.Drawing.Size(1044, 846);
             this.tueDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn1
@@ -262,6 +263,7 @@ namespace GenAlgoLab
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.wedDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.wedDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.wedDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.wedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.wedDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -276,7 +278,7 @@ namespace GenAlgoLab
             this.wedDataGridView.ReadOnly = true;
             this.wedDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.wedDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.wedDataGridView.Size = new System.Drawing.Size(1044, 830);
+            this.wedDataGridView.Size = new System.Drawing.Size(1044, 846);
             this.wedDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn5
@@ -329,6 +331,7 @@ namespace GenAlgoLab
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.thuDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.thuDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.thuDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.thuDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.thuDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -343,7 +346,7 @@ namespace GenAlgoLab
             this.thuDataGridView.ReadOnly = true;
             this.thuDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.thuDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.thuDataGridView.Size = new System.Drawing.Size(1044, 830);
+            this.thuDataGridView.Size = new System.Drawing.Size(1044, 846);
             this.thuDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn9
@@ -396,6 +399,7 @@ namespace GenAlgoLab
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.friDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.friDataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.friDataGridView.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.friDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.friDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -410,7 +414,7 @@ namespace GenAlgoLab
             this.friDataGridView.ReadOnly = true;
             this.friDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.friDataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.friDataGridView.Size = new System.Drawing.Size(1044, 830);
+            this.friDataGridView.Size = new System.Drawing.Size(1044, 846);
             this.friDataGridView.TabIndex = 2;
             // 
             // dataGridViewTextBoxColumn13
@@ -453,7 +457,7 @@ namespace GenAlgoLab
             this.button1.Text = "Ще 100 ітерацій";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.continue_100_btn_Click);
             // 
             // critErrorsLabel
             // 
@@ -462,9 +466,9 @@ namespace GenAlgoLab
             this.critErrorsLabel.Font = new System.Drawing.Font("Century Gothic", 10F);
             this.critErrorsLabel.Location = new System.Drawing.Point(1065, 173);
             this.critErrorsLabel.Name = "critErrorsLabel";
-            this.critErrorsLabel.Size = new System.Drawing.Size(52, 19);
+            this.critErrorsLabel.Size = new System.Drawing.Size(74, 19);
             this.critErrorsLabel.TabIndex = 4;
-            this.critErrorsLabel.Text = "label1";
+            this.critErrorsLabel.Text = "Violations";
             this.critErrorsLabel.Visible = false;
             // 
             // MainPage
@@ -476,6 +480,7 @@ namespace GenAlgoLab
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btn_start);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "MainPage";
