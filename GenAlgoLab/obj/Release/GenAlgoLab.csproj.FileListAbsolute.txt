@@ -2,9 +2,9 @@ C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\bin\Release\GenAlg
 C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\bin\Release\GenAlgoLab.exe
 C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\bin\Release\GenAlgoLab.pdb
 C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\obj\Release\GenAlgoLab.csprojAssemblyReference.cache
-C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\obj\Release\GenAlgoLab.MainPage.resources
 C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\obj\Release\GenAlgoLab.Properties.Resources.resources
 C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\obj\Release\GenAlgoLab.csproj.GenerateResource.cache
 C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\obj\Release\GenAlgoLab.csproj.CoreCompileInputs.cache
 C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\obj\Release\GenAlgoLab.exe
 C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\obj\Release\GenAlgoLab.pdb
+C:\Users\Andrew\STUD\Univ\IS_4\Lab4_gen\GenAlgoLab\GenAlgoLab\obj\Release\GenAlgoLab.MainPage.resources
